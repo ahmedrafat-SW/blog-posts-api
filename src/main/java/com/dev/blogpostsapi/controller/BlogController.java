@@ -1,5 +1,7 @@
-package com.dev.blogpostsapi;
+package com.dev.blogpostsapi.controller;
 
+import com.dev.blogpostsapi.model.Blog;
+import com.dev.blogpostsapi.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,17 @@ public class BlogController {
     @PostMapping
     public Blog createBlog(@RequestBody Blog blog){
         return repository.save(blog);
+    }
+
+    @PutMapping(path = "edit/{id}")
+    public Optional<Blog> updateBlogContent(@PathVariable Long id, @RequestBody Blog blog){
+        repository.findById(id).ifPresent(b ->
+                {
+                    b.setBlogTitle(blog.getBlogTitle());
+                    b.setBlogBody(blog.getBlogBody());
+                    b.setPublishDate(blog.getPublishDate());
+                });
+        return repository.findById(id);
     }
 
     @DeleteMapping(path = "/delete/{id}")

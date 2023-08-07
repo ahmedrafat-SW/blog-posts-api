@@ -1,11 +1,11 @@
 package com.dev.blogpostsapi;
 
 
+import com.dev.blogpostsapi.controller.BlogController;
+import com.dev.blogpostsapi.model.Author;
+import com.dev.blogpostsapi.model.Blog;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
-
-
-import java.time.LocalDate;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

@@ -1,11 +1,10 @@
-package com.dev.blogpostsapi;
+package com.dev.blogpostsapi.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "blogs")
@@ -14,23 +13,23 @@ import java.time.LocalDate;
 public class Blog {
     @Id
     @Column(name = "blog_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int blogId;
 
-    @Column(name = "blog_title")
+    @Column(name = "blog_title", columnDefinition = "text")
     private String blogTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "blog_author_id")
-    private Author author;
+    @Column(name = "blog_body", columnDefinition = "text")
+    private String blogBody;
 
     @Column(name = "publish_date")
     private Date publishDate;
 
-    @Column(name = "blog_body")
-    private String blogBody;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
-    public Blog() {
-    }
+    public Blog() {}
 
     public Blog(int blogId, String blogTitle, Author author, Date publishDate, String blogBody) {
         this.blogId = blogId;

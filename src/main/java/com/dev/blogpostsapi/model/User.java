@@ -1,4 +1,4 @@
-package com.dev.blogpostsapi;
+package com.dev.blogpostsapi.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,11 +8,10 @@ import lombok.Setter;
 @Table(name = "users")
 @Setter
 @Getter
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "user_type")
 public class User {
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column(name = "first_name")
@@ -27,18 +26,14 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private String role;
-
     public User() {
     }
 
-    public User(int userId, String firstName, String lastName, String email, String password, String role) {
+    public User(int userId, String firstName, String lastName, String email, String password) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 }
