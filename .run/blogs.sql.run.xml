@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="blogs.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+    <script-mode>FILE</script-mode>
+    <data-source id="ef73320f-e8bc-4423-85f2-490832f698e5" namespace="database/&quot;blog_posts&quot;/schema/&quot;public&quot;" />
+    <method v="2" />
+  </configuration>
+</component>
