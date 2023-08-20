@@ -1,6 +1,7 @@
 package com.dev.blogpostsapi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +9,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "blogs")
-@Setter
-@Getter
+@Data
 public class Blog {
     @Id
     @Column(name = "blog_id")
@@ -38,6 +38,5 @@ public class Blog {
         this.publishDate = publishDate;
         this.blogBody = blogBody;
     }
-    // Getters and setters
 }
 

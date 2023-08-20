@@ -1,11 +1,19 @@
 package com.dev.blogpostsapi.controller;
 
+import com.dev.blogpostsapi.dto.BlogDTO;
+import com.dev.blogpostsapi.model.Author;
 import com.dev.blogpostsapi.model.Blog;
 import com.dev.blogpostsapi.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1/blogs")
@@ -16,13 +24,24 @@ public class BlogController {
     private BlogRepository repository;
 
     @GetMapping
-    public Iterable<Blog> getAllBlogs(){
-        return repository.findAll();
+    public List<BlogDTO> getAllBlogs(){
+        return repository.findAll()
+                .stream()
+                .map(this::abstractBlog).collect(Collectors.toList());
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Blog> getBlogById(@PathVariable Long id){
-        return repository.findById(id);
+    public ResponseEntity<?> getBlogById(@Validated @PathVariable Long id){
+        if(repository.existsById(id)){
+            Blog blog = repository.findById(id).get();
+            Author author = blog.getAuthor();
+            BlogDTO blogDTO = new BlogDTO(blog,author);
+            return ResponseEntity.ok(blogDTO);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(id+" Not found. Please enter an existing Id.");
+        }
+
     }
 
     @PostMapping
@@ -47,4 +66,14 @@ public class BlogController {
         repository.delete(blog.get());
     }
 
+    private  BlogDTO abstractBlog(Blog blog){
+        return new BlogDTO(
+//                blog.getBlogId(),
+                blog.getBlogTitle(),
+                blog.getAuthor().getFirstName() + " "+
+                        blog.getAuthor().getLastName(),
+                blog.getBlogBody(),
+                blog.getPublishDate()
+        );
+    }
 }

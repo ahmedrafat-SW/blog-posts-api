@@ -1,5 +1,6 @@
 package com.dev.blogpostsapi.controller;
 
+import com.dev.blogpostsapi.dto.UserDTO;
 import com.dev.blogpostsapi.model.User;
 import com.dev.blogpostsapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1/users")
@@ -23,13 +26,26 @@ public class UserController {
 
 
     @GetMapping
-    public Iterable<User> getAllUsers(){
-        return repository.findAll();
+    public List<UserDTO> getAllUsers(){
+        return repository.findAll()
+                .stream()
+                .map(user -> {
+                    return new UserDTO(user.getUserId(),
+                            user.getFirstName(),
+                            user.getLastName(),
+                            user.getEmail());
+                }).collect(Collectors.toList());
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<User> getUserById(@PathVariable Long id){
-        return repository.findById(id);
+    public Optional<UserDTO> getUserById(@PathVariable Long id){
+        return repository.findById(id)
+                .map(user -> {
+                    return new UserDTO(user.getUserId(),
+                            user.getFirstName(),
+                            user.getLastName(),
+                            user.getEmail());
+                });
     }
 
     @PostMapping(path = "/register")
@@ -48,4 +64,5 @@ public class UserController {
         User user = repository.findById(id).get();
         repository.delete(user);
     }
+
 }
