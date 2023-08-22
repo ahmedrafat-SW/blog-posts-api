@@ -1,6 +1,6 @@
-package com.dev.blogpostsapi.repository;
+package com.dev.blogpostsapi.data.repository;
 
-import com.dev.blogpostsapi.model.User;
+import com.dev.blogpostsapi.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User,Long> {

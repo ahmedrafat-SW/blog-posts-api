@@ -1,8 +1,7 @@
-package com.dev.blogpostsapi.dto;
+package com.dev.blogpostsapi.model;
 
-import com.dev.blogpostsapi.model.Author;
-import com.dev.blogpostsapi.model.Blog;
-import lombok.AllArgsConstructor;
+import com.dev.blogpostsapi.data.entity.Author;
+import com.dev.blogpostsapi.data.entity.Blog;
 import lombok.Setter;
 
 import java.sql.Date;

@@ -1,10 +1,8 @@
-package com.dev.blogpostsapi.repository;
+package com.dev.blogpostsapi.data.repository;
 
-import com.dev.blogpostsapi.model.Author;
+import com.dev.blogpostsapi.data.entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {

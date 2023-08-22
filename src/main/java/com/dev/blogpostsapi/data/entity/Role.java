@@ -1,4 +1,4 @@
-package com.dev.blogpostsapi.model;
+package com.dev.blogpostsapi.data.entity;
 
 public enum Role {
     AUTHOR,

@@ -1,16 +1,15 @@
 package com.dev.blogpostsapi.controller;
 
-import com.dev.blogpostsapi.dto.BlogDTO;
-import com.dev.blogpostsapi.model.Author;
-import com.dev.blogpostsapi.model.Blog;
-import com.dev.blogpostsapi.repository.BlogRepository;
+import com.dev.blogpostsapi.model.BlogDTO;
+import com.dev.blogpostsapi.data.entity.Author;
+import com.dev.blogpostsapi.data.entity.Blog;
+import com.dev.blogpostsapi.data.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

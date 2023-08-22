@@ -1,11 +1,10 @@
 package com.dev.blogpostsapi.repositorytest;
 
-import com.dev.blogpostsapi.model.Blog;
-import com.dev.blogpostsapi.repository.BlogRepository;
+import com.dev.blogpostsapi.data.entity.Blog;
+import com.dev.blogpostsapi.data.repository.BlogRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 

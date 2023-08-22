@@ -1,9 +1,8 @@
 package com.dev.blogpostsapi.controller;
 
-import com.dev.blogpostsapi.dto.AuthorDTO;
-import com.dev.blogpostsapi.dto.UserDTO;
-import com.dev.blogpostsapi.model.Author;
-import com.dev.blogpostsapi.repository.AuthorRepository;
+import com.dev.blogpostsapi.model.AuthorDTO;
+import com.dev.blogpostsapi.data.entity.Author;
+import com.dev.blogpostsapi.data.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

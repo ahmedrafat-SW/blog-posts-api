@@ -1,9 +1,8 @@
 package com.dev.blogpostsapi.registration;
 
-import com.dev.blogpostsapi.model.User;
-import com.dev.blogpostsapi.repository.UserRepository;
+import com.dev.blogpostsapi.data.entity.User;
+import com.dev.blogpostsapi.data.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
