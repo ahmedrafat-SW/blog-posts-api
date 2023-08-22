@@ -1,4 +1,4 @@
-package com.dev.blogpostsapi.registration;
+package com.dev.blogpostsapi.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class LoginRequestDto {
+public class UserLoginDTO {
 
     @NotNull(message = "Email is required.")
     @Size(min = 1, message = "Email is required.")

@@ -1,5 +1,7 @@
 package com.dev.blogpostsapi.registration;
 
+import com.dev.blogpostsapi.model.UserLoginDTO;
+import com.dev.blogpostsapi.registration.service.UserLoginService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,14 +20,14 @@ import java.util.Map;
 public class LoginController {
 
 
-    private UserService userService;
+    private UserLoginService userLoginService;
     @PostMapping
-    public ResponseEntity<?> performLogin(@Valid @RequestBody LoginRequestDto loginDTO,
+    public ResponseEntity<?> performLogin(@Valid @RequestBody UserLoginDTO loginDTO,
                                                          BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
 //           Handle validation errors and return proper response
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(getValidationErrors(bindingResult));
-        }if (!userService.isUserValid(loginDTO.getEmail(), loginDTO.getPassword())) {
+        }if (!userLoginService.isUserValid(loginDTO.getEmail(), loginDTO.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }else
             return ResponseEntity.ok("Success !");

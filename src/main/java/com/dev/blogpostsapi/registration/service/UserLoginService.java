@@ -1,4 +1,4 @@
-package com.dev.blogpostsapi.registration;
+package com.dev.blogpostsapi.registration.service;
 
 import com.dev.blogpostsapi.data.entity.User;
 import com.dev.blogpostsapi.data.repository.UserRepository;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserLoginService {
 
     private final UserRepository repository;
 
