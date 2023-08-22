@@ -1,78 +1,55 @@
 package com.dev.blogpostsapi.controller;
 
 import com.dev.blogpostsapi.model.BlogDTO;
-import com.dev.blogpostsapi.data.entity.Author;
 import com.dev.blogpostsapi.data.entity.Blog;
 import com.dev.blogpostsapi.data.repository.BlogRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dev.blogpostsapi.service.BlogService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1/blogs")
 @CrossOrigin(origins = "http://localhost:3000")
 public class BlogController {
 
-    @Autowired
-    private BlogRepository repository;
+    private final BlogRepository repository;
+    private final BlogService blogService;
+
+    public BlogController(BlogRepository repository, BlogService blogService) {
+        this.repository = repository;
+        this.blogService = blogService;
+    }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<BlogDTO> getAllBlogs(){
-        return repository.findAll()
-                .stream()
-                .map(this::abstractBlog).collect(Collectors.toList());
+        return blogService.getAllBlogs();
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getBlogById(@Validated @PathVariable Long id){
-        if(repository.existsById(id)){
-            Blog blog = repository.findById(id).get();
-            Author author = blog.getAuthor();
-            BlogDTO blogDTO = new BlogDTO(blog,author);
-            return ResponseEntity.ok(blogDTO);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(id+" Not found. Please enter an existing Id.");
-        }
-
+    public BlogDTO getBlogById(@Validated @PathVariable int id){
+       return blogService.getBlogById(id);
     }
 
     @PostMapping
-    public Blog createBlog(@RequestBody Blog blog){
-        return repository.save(blog);
+    @ResponseStatus(HttpStatus.CREATED)
+    public BlogDTO createBlog(@RequestBody BlogDTO blog){
+        return blogService.createBlog(blog);
     }
 
     @PutMapping(path = "edit/{id}")
-    public Optional<Blog> updateBlogContent(@PathVariable Long id, @RequestBody Blog blog){
-        repository.findById(id).ifPresent(b ->
-                {
-                    b.setBlogTitle(blog.getBlogTitle());
-                    b.setBlogBody(blog.getBlogBody());
-                    b.setPublishDate(blog.getPublishDate());
-                });
-        return repository.findById(id);
+    public BlogDTO updateBlogContent(@PathVariable int id, @RequestBody BlogDTO blog){
+        return blogService.updateBlog(blog);
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public void deleteBlog(@PathVariable Long id){
+    public void deleteBlog(@PathVariable int id){
         Optional<Blog> blog = repository.findById(id);
         repository.delete(blog.get());
     }
 
-    private  BlogDTO abstractBlog(Blog blog){
-        return new BlogDTO(
-//                blog.getBlogId(),
-                blog.getBlogTitle(),
-                blog.getAuthor().getFirstName() + " "+
-                        blog.getAuthor().getLastName(),
-                blog.getBlogBody(),
-                blog.getPublishDate()
-        );
-    }
 }
