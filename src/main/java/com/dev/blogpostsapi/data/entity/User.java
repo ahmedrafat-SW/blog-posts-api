@@ -1,13 +1,13 @@
 package com.dev.blogpostsapi.data.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users")
-@Setter
-@Getter
+@Data
 public class User {
     @Id
     @Column(name = "user_id")

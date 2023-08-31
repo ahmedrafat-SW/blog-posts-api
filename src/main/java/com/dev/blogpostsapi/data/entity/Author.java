@@ -1,6 +1,7 @@
 package com.dev.blogpostsapi.data.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "authors")
-@Setter
-@Getter
+@Data
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -54,5 +54,13 @@ public class Author {
         this.bio = bio;
         this.email = email;
         this.password = password;
+    }
+
+    public Author(Long id, String firstName, String lastName, String bio, String jobTitle) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.jobTitle = jobTitle;
     }
 }
