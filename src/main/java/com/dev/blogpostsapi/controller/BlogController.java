@@ -13,14 +13,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1/blogs")
-@CrossOrigin(origins = "http://localhost:3000")
 public class BlogController {
 
-    private final BlogRepository repository;
     private final BlogService blogService;
 
-    public BlogController(BlogRepository repository, BlogService blogService) {
-        this.repository = repository;
+    public BlogController(BlogService blogService) {
         this.blogService = blogService;
     }
 
@@ -48,8 +45,7 @@ public class BlogController {
 
     @DeleteMapping(path = "/delete/{id}")
     public void deleteBlog(@PathVariable int id){
-        Optional<Blog> blog = repository.findById(id);
-        repository.delete(blog.get());
+        blogService.deleteBlog(id);
     }
 
 }

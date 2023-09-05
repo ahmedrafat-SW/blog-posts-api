@@ -64,6 +64,11 @@ public class BlogService {
         return translateToBlogDTO(blogEntity.get());
     }
 
+    public void deleteBlog(int id){
+        Optional<Blog> blog = this.blogRepository.findById(id);
+        this.blogRepository.delete(blog.get());
+    }
+
 
     private Blog translateToBlog(BlogDTO blogDTO ){
         return new Blog(

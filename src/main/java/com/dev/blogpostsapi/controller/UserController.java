@@ -4,6 +4,7 @@ import com.dev.blogpostsapi.model.UserDTO;
 import com.dev.blogpostsapi.data.entity.User;
 import com.dev.blogpostsapi.data.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +16,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1/users")
-@CrossOrigin(origins = "http://localhost:3000")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
     private UserRepository repository;
-//    private final BCryptPasswordEncoder passwordEncoder;
-
-
 
     @GetMapping
     public List<UserDTO> getAllUsers(){

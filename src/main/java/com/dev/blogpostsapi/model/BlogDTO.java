@@ -1,9 +1,7 @@
 package com.dev.blogpostsapi.model;
 
-import com.dev.blogpostsapi.data.entity.Author;
-import com.dev.blogpostsapi.data.entity.Blog;
+
 import lombok.Data;
-import lombok.Setter;
 
 import java.sql.Date;
 
